@@ -3,7 +3,6 @@ import re
 from django import template
 from django.conf import settings
 from django.template import TemplateSyntaxError
-from django.utils import six
 from django.template.base import FilterExpression
 from django.template.defaulttags import URLNode
 from django.utils.encoding import iri_to_uri, smart_str
@@ -11,6 +10,11 @@ from django.urls import set_urlconf, get_urlconf
 
 from ..resolvers import reverse_host, get_host
 from ..utils import normalize_scheme, normalize_port
+
+try:
+    from django.utils import six
+except ImportError:
+    import six
 
 register = template.Library()
 

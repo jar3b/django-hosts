@@ -11,15 +11,17 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.signals import setting_changed
 from django.urls import NoReverseMatch, reverse as reverse_path
-from django.utils import six
 from django.utils.encoding import iri_to_uri, force_text
 from django.utils.functional import lazy
 from django.utils.lru_cache import lru_cache
 from django.utils.regex_helper import normalize
-
 from .defaults import host as host_cls
 from .utils import normalize_scheme, normalize_port
 
+try:
+    from django.utils import six
+except ImportError:
+    import six
 
 @lru_cache()
 def get_hostconf():
